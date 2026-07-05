@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:language_learning_app/components/icon_button.dart';
 
 class PhrasesScreen extends StatelessWidget {
   const PhrasesScreen({super.key});
@@ -7,11 +8,16 @@ class PhrasesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Phrases'),
+        leading: CustomIconButton(
+          icon: Icons.arrow_back,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        backgroundColor: Color(0xff50adc7),
+        title: const Text('Phrases', style: TextStyle(color: Colors.white)),
       ),
-      body: const Center(
-        child: Text('Phrases Screen'),
-      ),
+      body: const Center(child: Text('Phrases Screen')),
     );
   }
 }
