@@ -1,15 +1,15 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:language_learning_app/components/icon_button.dart';
-import 'package:language_learning_app/models/numbers.dart';
+import 'package:language_learning_app/components/phrase_item.dart';
+import 'package:language_learning_app/models/DataModel.dart';
 
-class ItemNumbers extends StatelessWidget {
-  const ItemNumbers({
+class ItemList extends StatelessWidget {
+  const ItemList.ItemList({
     super.key,
-    required this.number,
+    required this.item,
     required this.backgroundColor,
   });
-  final Data number;
+  final DataModel item;
   final Color backgroundColor;
 
   @override
@@ -19,10 +19,12 @@ class ItemNumbers extends StatelessWidget {
       height: 80,
       child: Row(
         children: [
-          Container(
-            color: Color(0xfffef6db),
-            child: Image.asset(number.imageAsset),
-          ),
+          item.imageAsset == null
+              ? PhraseItem(item: item)
+              : Container(
+                  color: Color(0xfffef6db),
+                  child: Image.asset(item.imageAsset!),
+                ),
           Padding(
             padding: const EdgeInsets.only(left: 16),
             child: Column(
@@ -30,11 +32,11 @@ class ItemNumbers extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  number.label,
+                  item.label,
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 Text(
-                  number.translation,
+                  item.translation,
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ],
@@ -45,9 +47,7 @@ class ItemNumbers extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16.0),
             child: CustomIconButton(
               onPressed: () async {
-                final player = AudioPlayer();
-                await player.setSourceAsset(number.soundAsset);
-                await player.play(AssetSource(number.soundAsset));
+                item.playSound();
               },
               icon: Icons.play_arrow,
             ),
