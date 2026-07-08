@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class TuneModel {
@@ -5,7 +6,17 @@ class TuneModel {
   final String audioAsset;
   final Color color;
 
-  TuneModel({required this.title, required this.audioAsset, required this.color});
+  TuneModel({
+    required this.title,
+    required this.audioAsset,
+    required this.color,
+  });
+
+  Future<void> playAudio() async {
+    AudioPlayer audioPlayer = AudioPlayer();
+    await audioPlayer.setSource(AssetSource(audioAsset));
+    await audioPlayer.play(AssetSource(audioAsset));
+  }
 }
 
 final List<TuneModel> tunes = [
@@ -17,4 +28,3 @@ final List<TuneModel> tunes = [
   TuneModel(title: 'Note 6', audioAsset: 'note6.wav', color: Colors.cyan),
   TuneModel(title: 'Note 7', audioAsset: 'note7.wav', color: Colors.amber),
 ];
-  

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tunes_layer_app/components/custome_contener.dart';
+import 'package:tunes_layer_app/components/tune_item.dart';
 import 'package:tunes_layer_app/models/tune_model.dart';
 
 class Homepage extends StatelessWidget {
@@ -10,7 +10,9 @@ class Homepage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.amber,
         appBar: AppBar(
+          elevation: 0,
           title: Text(
             'Flutter Tunes Layer App',
             style: TextStyle(color: Colors.white),
@@ -18,12 +20,8 @@ class Homepage extends StatelessWidget {
           backgroundColor: Colors.grey[900],
           centerTitle: true,
         ),
-        body: ListView.builder(
-          itemCount: tunes.length,
-          itemBuilder: (context, index) {
-            final tune = tunes[index];
-            return CustomContainer(tune: tune);
-          },
+        body: Column(
+          children: tunes.map((tune) => TuneItemContainer(tune: tune)).toList(),
         ),
       ),
     );
