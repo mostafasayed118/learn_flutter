@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/homepage.dart';
+import 'package:news_app/screens/homepage_screen.dart';
 
 void main() {
   runApp(const NewsApp());
@@ -11,6 +11,6 @@ class NewsApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const HomePage());
+    return MaterialApp(home: const HomePageScreen());
   }
 }
