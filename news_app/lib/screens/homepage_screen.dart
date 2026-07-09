@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/components/categorieslistview.dart';
+import 'package:news_app/components/category_card.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
@@ -7,17 +9,18 @@ class HomePageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        centerTitle: true,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('News', style: TextStyle(color: Colors.black)),
             Text('Claude', style: TextStyle(color: Colors.amber)),
           ],
         ),
       ),
-      body: const Center(child: Text('News Content')),
+      body: CategoriesListView(),
     );
   }
 }
+
