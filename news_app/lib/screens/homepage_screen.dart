@@ -40,6 +40,7 @@ class HomePageScreen extends StatelessWidget {
             SliverToBoxAdapter(child: const SizedBox(height: 10)),
             const NewsListView(),
           ],
+          
         ),
       ),
     );
