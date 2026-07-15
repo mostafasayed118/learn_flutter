@@ -28,7 +28,7 @@ class NewsViewModel extends ChangeNotifier {
       _articles = await _newsServices.getNews();
       _status = NewsStatus.loaded;
     } catch (e) {
-      _errorMessage = 'Failed to load news. Check your connection.';
+      _errorMessage = 'Failed to load news. Check your connection.' ;
       _status = NewsStatus.error;
     }
     notifyListeners();

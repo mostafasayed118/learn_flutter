@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/components/categorieslistview.dart';
+import 'package:news_app/components/hadline_widget.dart';
 import 'package:news_app/components/newslistview.dart';
 import 'package:news_app/viewmodels/news_view_model.dart';
 import 'package:provider/provider.dart';
@@ -15,25 +16,7 @@ class HomePageScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'News',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Claude',
-                style: TextStyle(
-                  color: Colors.amber,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+          title: headline_widget(),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -50,3 +33,4 @@ class HomePageScreen extends StatelessWidget {
     );
   }
 }
+

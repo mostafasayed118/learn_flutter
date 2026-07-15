@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/components/error_message.dart';
 import 'package:news_app/components/news_tile.dart';
 import 'package:news_app/viewmodels/news_view_model.dart';
 import 'package:provider/provider.dart';
@@ -15,25 +16,16 @@ class NewsListView extends StatelessWidget {
         return const SliverFillRemaining(
           hasScrollBody: false,
           child: Center(
-            child: CircularProgressIndicator(color: Colors.amber, strokeWidth: 2),
+            child: CircularProgressIndicator(
+              color: Colors.amber,
+              strokeWidth: 2,
+            ),
           ),
         );
       case NewsStatus.error:
         return SliverFillRemaining(
           hasScrollBody: false,
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(viewModel.errorMessage ?? 'Something went wrong.'),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: viewModel.loadNews,
-                  child: const Text('Retry'),
-                ),
-              ],
-            ),
-          ),
+          child: ErrorMessage(viewModel: viewModel),
         );
       case NewsStatus.loaded:
         if (viewModel.articles.isEmpty) {
