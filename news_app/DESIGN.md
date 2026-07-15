@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: News-App-Design
-description: A dark-themed news reader scaffold — deep navy canvas, red accent for highlights, category-based navigation with icon assets, and a minimalist in-progress UI awaiting API integration.
+description: A dark-themed news reader app — deep navy canvas, red accent highlights, category grid with icon assets, real-time headlines from NewsAPI, and article detail via WebView.
 
 colors:
   primary: "#1A1A2E"
@@ -75,9 +75,7 @@ components:
 
 ## Overview
 
-A dark-themed news reader app in early development. The current scaffold has an empty `Scaffold` body (no UI rendered) but includes a full set of category icon assets (`.avif` format) for Business, Entertainment, General, Health, Science, Sports, and Technology. The design direction is a deep navy `#0F3460` canvas with a bright red `#E94560` accent — a high-contrast dark-mode news experience.
-
-The project is a work-in-progress: the category assets are ready for a grid-based category selector UI, and the API integration layer is the next milestone. The design system below captures the intended visual language for when the UI is built.
+A dark-themed news reader app with real-time article fetching from NewsAPI. The homepage displays a horizontal scrollable category selector with 7 color-coded icon assets (`.jpeg` format) for Business, Entertainment, General, Health, Science, Sports, and Technology. Tapping a category loads category-specific articles. Tapping an article opens it in an in-app WebView for full reading. The design direction is a deep navy `#0F3460` canvas with a bright red `#E94560` accent — a high-contrast dark-mode news experience.
 
 ## Colors
 
@@ -121,8 +119,8 @@ System-native sans-serif. No custom fonts.
 ## Layout (Planned)
 
 ### Category Grid
-- A 2–3 column grid of category cards, each 48–64 px icon centered on a dark card.
-- Each card taps to push a category-specific article list screen.
+- A horizontal scrollable list of category cards, each with a 48px icon centered on a dark card.
+- Each card taps to load category-specific articles in the news list below.
 
 ### Article List
 - `ListView.builder` of article cards — each card a `Container` with category-colored top border, headline text, source, and timestamp.
@@ -135,7 +133,7 @@ System-native sans-serif. No custom fonts.
 ## Shapes
 - **Category cards**: `{rounded.md}` (8px) corners.
 - **Article cards**: `{rounded.md}` (8px) with a colored top border.
-- **Icon assets**: `.avif` format — high-quality, low-bandwidth.
+- **Icon assets**: `.jpeg` format — category-specific images.
 
 ## Do's and Don'ts
 
@@ -148,5 +146,5 @@ System-native sans-serif. No custom fonts.
 ### Don't
 - Don't switch to a light theme — the dark mode is intentional and part of the brand.
 - Don't use the red accent for non-interactive text — it signals "tap/click" not "read."
-- Don't flatten category icons into a list — the grid layout is the planned navigation model.
+- Don't flatten category icons into a list — the horizontal scroll is the navigation model.
 - Don't add competing accent colors beyond the seven category colors.

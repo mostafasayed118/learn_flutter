@@ -2,9 +2,9 @@
 
 ![Flutter](https://img.shields.io/badge/Framework-Flutter-02569B)
 ![Dart](https://img.shields.io/badge/Language-Dart-0175C2)
-![Status](https://img.shields.io/badge/All_Projects-7-blue)
+![Status](https://img.shields.io/badge/All_Projects-7%20✅-blue)
 
-> A collection of **7 Flutter projects** — from Hello World to interactive apps — each with its own source code, assets, and design system documentation.
+> A collection of **7 Flutter projects** — from Hello World to interactive apps — each with its own source code, assets, and design system documentation. All projects completed!
 
 ---
 
@@ -17,7 +17,7 @@
 | 3 | [Business Card App](./business_card_app/) | ✅ Completed | Personal digital business card with Pacifico cursive font |
 | 4 | [Basketball Points Counter](./basketball_points_counter_app/) | ✅ Completed | Real-time two-team basketball scoreboard |
 | 5 | [Language Learning App](./language_learning_app/) | ✅ Completed | Japanese-English vocabulary with audio pronunciation |
-| 6 | [News App](./news_app/) | 🚧 In Progress | Dark-themed category-based news reader |
+| 6 | [News App](./news_app/) | ✅ Completed | Dark-themed category-based news reader with NewsAPI |
 | 7 | [Tones Layer App](./tunes_layer_app/) | ✅ Completed | Rainbow xylophone pad — tap to play tones |
 
 ---
@@ -26,7 +26,7 @@
 
 - **Framework**: Flutter
 - **Language**: Dart
-- **Packages**: `audioplayers` (Language Learning App, Tones Layer App)
+- **Packages**: `audioplayers` (Language Learning App, Tones Layer App), `dio` (News App), `provider` (News App), `webview_flutter` (News App)
 - **Fonts**: Pacifico (Business Card App)
 - **Platforms**: Android, iOS, Web, Windows, macOS, Linux
 
