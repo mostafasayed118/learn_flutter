@@ -11,7 +11,7 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => NewsViewModel()..loadNews(),
+      create: (_) => NewsViewModel()..loadNews('general'),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -25,7 +25,7 @@ class HomePageScreen extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(child: CategoriesListView()),
               SliverToBoxAdapter(child: const SizedBox(height: 10)),
-              const NewsListView(),
+              const NewsListView(category: 'general'),
             ],
           ),
         ),

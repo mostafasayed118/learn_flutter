@@ -7,7 +7,7 @@ enum NewsStatus { loading, loaded, error }
 
 class NewsViewModel extends ChangeNotifier {
   NewsViewModel({NewsServices? newsServices})
-      : _newsServices = newsServices ?? NewsServices(dio);
+    : _newsServices = newsServices ?? NewsServices(dio);
 
   final NewsServices _newsServices;
 
@@ -19,16 +19,16 @@ class NewsViewModel extends ChangeNotifier {
   List<ArticleModel> get articles => _articles;
   String? get errorMessage => _errorMessage;
 
-  Future<void> loadNews() async {
+  Future<void> loadNews([String category = 'general']) async {
     _status = NewsStatus.loading;
     _errorMessage = null;
     notifyListeners();
 
     try {
-      _articles = await _newsServices.getNews();
+      _articles = await _newsServices.getTopHeadlinesNews(category: category);
       _status = NewsStatus.loaded;
     } catch (e) {
-      _errorMessage = 'Failed to load news. Check your connection.' ;
+      _errorMessage = 'Failed to load news. Check your connection.';
       _status = NewsStatus.error;
     }
     notifyListeners();

@@ -5,8 +5,8 @@ import 'package:news_app/viewmodels/news_view_model.dart';
 import 'package:provider/provider.dart';
 
 class NewsListView extends StatelessWidget {
-  const NewsListView({super.key});
-
+  const NewsListView({super.key, required this.category});
+  final String category;
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<NewsViewModel>();
