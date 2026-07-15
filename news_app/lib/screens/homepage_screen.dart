@@ -7,11 +7,12 @@ import 'package:provider/provider.dart';
 
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({super.key});
+  final String category = 'general';
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => NewsViewModel()..loadNews('general'),
+      create: (_) => NewsViewModel()..loadNews(category),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -25,7 +26,7 @@ class HomePageScreen extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(child: CategoriesListView()),
               SliverToBoxAdapter(child: const SizedBox(height: 10)),
-              const NewsListView(category: 'general'),
+              NewsListView(category: category),
             ],
           ),
         ),

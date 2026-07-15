@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/article_model.dart';
+import '../screens/webview_screen.dart';
 
 class NewsTile extends StatelessWidget {
   final ArticleModel article;
@@ -10,9 +11,18 @@ class NewsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
+    return InkWell(
+      onTap: () {
+        if (article.url.isEmpty) return;
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => WebViewScreen(url: article.url),
+          ),
+        );
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: Image.network(
@@ -46,6 +56,7 @@ class NewsTile extends StatelessWidget {
           style: TextStyle(color: Colors.grey[600]),
         ),
       ],
+      ),
     );
   }
 }

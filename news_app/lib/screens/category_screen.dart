@@ -26,7 +26,7 @@ class CategoryScreen extends StatelessWidget {
         ),
         body: CustomScrollView(
           slivers: [
-            NewsListView(category: 'business'),
+            NewsListView(category: category),
           ],
         ),
       ),
