@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/widgets/text_widget_bold.dart';
-import 'package:weather_app/widgets/text_widget_normal.dart';
+import 'package:weather_app/views/search_view.dart';
+import 'package:weather_app/widgets/weather_infobody_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -13,41 +13,21 @@ class HomeView extends StatelessWidget {
           'Weather App',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
+
         backgroundColor: Colors.blue,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SearchView()),
+              );
+            },
+            icon: Icon(Icons.search, color: Colors.white),
+          ),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextWidgetBold(text: 'Cairo', fontSize: 24, color: Colors.black),
-            TextWidgetNormal(
-              text: 'Updated at 11:00',
-              fontSize: 20,
-              color: Colors.black,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                TextWidgetNormal(
-                  text: '25°C',
-                  fontSize: 48,
-                  color: Colors.black,
-                ),
-                const SizedBox(width: 8),
-                TextWidgetNormal(
-                  text: 'Sunny',
-                  fontSize: 24,
-                  color: Colors.black,
-                ),
-                
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: WeatherInfoBody(),
     );
   }
 }
