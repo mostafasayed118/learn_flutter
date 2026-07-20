@@ -20,18 +20,18 @@ class WeatherModel {
   });
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
+    final current = json['current'] as Map<String, dynamic>;
+    final location = json['location'] as Map<String, dynamic>;
+    final condition = current['condition'] as Map<String, dynamic>;
     return WeatherModel(
-      cityName: json['location']['name'] as String,
-      lastUpdated: json['current']['last_updated'] as DateTime,
-      condition: json['forecast']['forecastday'][0]['day']['condition']['text'] as String,
-      avgtemp: (json['forecast']['forecastday'][0]['day']['avgtemp_c'] as num)
-          .toDouble(),
-      maxtemp: (json['forecast']['forecastday'][0]['day']['maxtemp_c'] as num)
-          .toDouble(),
-      mintemp: (json['forecast']['forecastday'][0]['day']['mintemp_c'] as num)
-          .toDouble(),
-      humidity: json['current']['humidity'] as int,
-      icon: json['forecast']['forecastday'][0]['day']['condition']['icon'] as String,
+      cityName: location['name'] as String,
+      lastUpdated: DateTime.parse(current['last_updated'] as String),
+      condition: condition['text'] as String,
+      avgtemp: (current['temp_c'] as num).toDouble(),
+      maxtemp: (current['temp_c'] as num).toDouble(),
+      mintemp: (current['temp_c'] as num).toDouble(),
+      humidity: current['humidity'] as int,
+      icon: condition['icon'] as String,
     );
   }
 
@@ -45,5 +45,12 @@ class WeatherModel {
       'humidity': humidity,
       'icon': icon,
     };
+  }
+
+  @override
+  String toString() {
+    return 'WeatherModel(cityName: $cityName, avgtemp: $avgtemp, '
+        'maxtemp: $maxtemp, mintemp: $mintemp, condition: $condition, '
+        'humidity: $humidity, icon: $icon, lastUpdated: $lastUpdated)';
   }
 }
