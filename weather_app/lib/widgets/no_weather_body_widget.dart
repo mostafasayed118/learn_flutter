@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/widgets/text_widget_grey.dart';
+import 'package:weather_app/widgets/custom_text_widget.dart';
 
 class NoWeatherBody extends StatelessWidget {
   const NoWeatherBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'Welcome to the Weather App 🌤️',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          CustomText(
+            text: 'Welcome to the Weather App 🌤️',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
-          const SizedBox(height: 40),
-          TextWidgetGrey(text: 'There is no weather 😌 start '),
-          TextWidgetGrey(text: 'searching now 🔍'),
+          SizedBox(height: 40),
+          CustomText(
+            text: 'There is no weather 😌 start ',
+            fontSize: 24,
+            color: Colors.grey,
+          ),
+          CustomText(
+            text: 'searching now 🔍',
+            fontSize: 24,
+            color: Colors.grey,
+          ),
         ],
       ),
     );

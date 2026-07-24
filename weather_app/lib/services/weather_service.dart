@@ -1,30 +1,35 @@
 import 'package:dio/dio.dart';
+import 'package:weather_app/constants/app_constants.dart';
 import 'package:weather_app/models/weather_model.dart';
 
 class WeatherService {
   final Dio dio;
-  final String apiKey = '6f2b0082d3414b69994165406261607';
-  final String baseUrl = 'https://api.weatherapi.com/v1';
 
   WeatherService(this.dio);
 
   Future<WeatherModel> getCurrentWeatherData({required String cityName}) async {
     try {
       final response = await dio.get(
-        '$baseUrl/current.json',
-        queryParameters: {'key': apiKey, 'q': cityName, 'aqi': 'no'},
+        '${AppConstants.baseUrl}/forecast.json',
+        queryParameters: {
+          'key': AppConstants.apiKey,
+          'q': cityName,
+          'days': '1',
+          'aqi': 'no',
+          'alerts': 'no',
+        },
       );
 
       final weatherData = response.data;
       return WeatherModel.fromJson(weatherData);
     } on DioException catch (e) {
       final errorMessage =
-          e.response?.data['error']['message'] ??
-          'Oops! Something went wrong. Please try again later.';
+          (e.response?.data is Map && (e.response!.data as Map)['error'] is Map)
+              ? ((e.response!.data as Map)['error'] as Map)['message'] as String
+              : 'Oops! Something went wrong. Please try again later.';
       throw Exception('Failed to load weather data: $errorMessage');
-    }
-    catch (e) {
-      throw Exception('Failed to load weather data: ');
+    } catch (e) {
+      throw Exception('Failed to load weather data: $e');
     }
   }
 }

@@ -17,8 +17,7 @@ class HomeView extends StatelessWidget {
           'Weather App',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-
-        backgroundColor: Colors.blue,
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         actions: [
           IconButton(
@@ -27,22 +26,22 @@ class HomeView extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const SearchView()),
               );
             },
-            icon: Icon(Icons.search, color: Colors.white),
+            icon: const Icon(Icons.search, color: Colors.white),
           ),
         ],
       ),
       body: BlocBuilder<GetWeatherCubit, WeatherState>(
         builder: (context, state) {
-          if (state is WeatherInitialState) {
-            return const NoWeatherBody();
-          } else if (state is WeatherLoadedState) {
-            return WeatherInfoBody();
-          } else if (state is WeatherFailedState) {
-            return Center(
-              child: Text('Failed to fetch weather data. Please try again.'),
-            );
+          switch (state) {
+            case WeatherInitialState():
+              return const NoWeatherBody();
+            case WeatherLoadedState(:final weatherModel):
+              return WeatherInfoBody(weatherModel: weatherModel);
+            case WeatherFailedState(:final errorMessage):
+              return Center(child: Text(errorMessage));
+            default:
+              return const SizedBox.shrink();
           }
-          return Container();
         },
       ),
     );

@@ -3,7 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/cubits/get_weather_cubit/get_weather_cubit.dart';
-import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/cubits/get_weather_cubit/get_weather_states.dart';
+import 'package:weather_app/utils/theme_utils.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
@@ -13,47 +14,67 @@ class SearchView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Search a City', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue,
+        backgroundColor: Theme.of(context).primaryColor,
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: TextField(
-            onSubmitted: (value) async {
-              var getWeatherCubit = BlocProvider.of<GetWeatherCubit>(context);
-              await getWeatherCubit.getWeather(cityName: value);
-              log(weatherModel.toString());
+          child: BlocBuilder<GetWeatherCubit, WeatherState>(
+            builder: (context, state) {
+              final condition = state is WeatherLoadedState
+                  ? state.weatherModel.condition
+                  : "";
+              return TextField(
+                onSubmitted: (value) async {
+                  final navigator = Navigator.of(context);
+                  var getWeatherCubit =
+                      BlocProvider.of<GetWeatherCubit>(context);
+                  await getWeatherCubit.getWeather(cityName: value);
+                  final state = getWeatherCubit.state;
+                  if (state is WeatherLoadedState) {
+                    log(state.weatherModel.toString());
+                  } else if (state is WeatherFailedState) {
+                    log(state.errorMessage);
+                  }
 
-              Navigator.pop(context);
+                  navigator.pop();
+                },
+                decoration: InputDecoration(
+                  labelText: 'Search',
+                  labelStyle: TextStyle(
+                    color: getThemeColor(condition),
+                  ),
+                  hintText: 'Enter city name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(
+                      color: getThemeColor(condition),
+                    ),
+                    gapPadding: 4.0,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(
+                      color: getThemeColor(condition),
+                    ),
+                    gapPadding: 4.0,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    borderSide: BorderSide(
+                      color: getThemeColor(condition),
+                    ),
+                    gapPadding: 4.0,
+                  ),
+                  suffixIcon: const Icon(Icons.search),
+                  suffixIconColor: getThemeColor(condition),
+                ),
+              );
             },
-            decoration: InputDecoration(
-              labelText: 'Search',
-              labelStyle: TextStyle(color: Colors.blue),
-              hintText: 'Enter city name',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: Colors.blue),
-                gapPadding: 4.0,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: Colors.blue),
-                gapPadding: 4.0,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: Colors.blue),
-                gapPadding: 4.0,
-              ),
-              suffixIcon: Icon(Icons.search),
-              suffixIconColor: Colors.blue,
-            ),
           ),
         ),
       ),
     );
   }
 }
-
-WeatherModel? weatherModel;

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/widgets/text_widget_bold.dart';
-import 'package:weather_app/widgets/text_widget_normal.dart';
+import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/widgets/custom_text_widget.dart';
 
 class RowDataOfWeather extends StatelessWidget {
-  const RowDataOfWeather({super.key});
+  final WeatherModel weatherModel;
+  const RowDataOfWeather({super.key, required this.weatherModel});
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +13,24 @@ class RowDataOfWeather extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset('assets/images/cloudy.png', width: 100, height: 100),
-          TextWidgetBold(text: '25°C', fontSize: 32, color: Colors.black),
-
+          Image.network('https:${weatherModel.icon}', width: 64, height: 64),
+          CustomText(
+            text: '${weatherModel.avgtemp.toStringAsFixed(1)}°C',
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
           Column(
             children: [
-              TextWidgetNormal(
-                text: 'MaxTemp: 30°C',
-                fontSize: 12,
-                color: Colors.black,
+              CustomText(
+                text: 'MaxTemp: ${weatherModel.maxtemp.toStringAsFixed(1)}°C',
+                fontSize: 14,
+                color: Colors.white,
               ),
-              TextWidgetNormal(
-                text: 'MinTemp: 20°C',
-                fontSize: 12,
-                color: Colors.black,
+              CustomText(
+                text: 'MinTemp: ${weatherModel.mintemp.toStringAsFixed(1)}°C',
+                fontSize: 14,
+                color: Colors.white,
               ),
             ],
           ),

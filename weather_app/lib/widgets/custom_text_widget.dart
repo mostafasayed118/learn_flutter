@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class TextWidgetNormal extends StatelessWidget {
+class CustomText extends StatelessWidget {
   final String text;
-  final double fontSize;
-  final Color color;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final Color? color;
 
-  const TextWidgetNormal({
+  const CustomText({
     super.key,
     required this.text,
-    required this.fontSize,
-    required this.color,
+    this.fontSize,
+    this.fontWeight,
+    this.color,
   });
 
   @override
@@ -18,6 +20,7 @@ class TextWidgetNormal extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: fontSize,
+        fontWeight: fontWeight,
         color: color,
       ),
     );
