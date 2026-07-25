@@ -1,4 +1,4 @@
-import 'package:chat_app/views/home_view.dart';
+import 'package:chat_app/views/sign_in_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +11,10 @@ class ChatApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Demo', home: HomeView());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Chat App',
+      home: SignInView(),
+    );
   }
 }
