@@ -5,14 +5,14 @@ import 'package:chat_app/widgets/custom_text.dart';
 import 'package:chat_app/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
+class _SignUpViewState extends State<SignUpView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -68,7 +68,7 @@ class _SignInViewState extends State<SignInView> {
                     ),
                     const SizedBox(height: 20),
                     const CustomText(
-                      text: 'Sign in to continue',
+                      text: 'Sign up to continue',
                       fontSize: 16,
                       color: AppColors.bodyText,
                     ),
@@ -91,22 +91,22 @@ class _SignInViewState extends State<SignInView> {
                       validator: _validatePassword,
                     ),
                     const SizedBox(height: 20),
-                    CustomButton(text: 'Sign in', onPressed: _signIn),
+                    CustomButton(text: 'Sign up', onPressed: _signIn),
                     const SizedBox(height: 20),
                     Wrap(
                       alignment: WrapAlignment.center,
                       children: [
                         const CustomText(
-                          text: "Don't have an account? ",
+                          text: "I have an account ",
                           fontSize: 16,
                           color: AppColors.bodyText,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/sign-up');
+                            Navigator.pop(context);
                           },
                           child: const CustomText(
-                            text: 'Sign up',
+                            text: 'Sign In',
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: AppColors.primary,
