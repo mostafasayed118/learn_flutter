@@ -6,7 +6,8 @@ import 'package:chat_app/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
 class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+  static String routeNameSignIn = '/sign-in';
+  const SignInView({ super.key});
 
   @override
   State<SignInView> createState() => _SignInViewState();
@@ -40,7 +41,6 @@ class _SignInViewState extends State<SignInView> {
     if (value == null || value.isEmpty) return 'Please enter your password';
     return null;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +63,14 @@ class _SignInViewState extends State<SignInView> {
                       text: 'Welcome to Chat App',
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.onPrimary,
+                      color: AppColors.KOnPrimary,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
                     const CustomText(
                       text: 'Sign in to continue',
                       fontSize: 16,
-                      color: AppColors.bodyText,
+                      color: AppColors.KBodyText,
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
@@ -99,17 +99,17 @@ class _SignInViewState extends State<SignInView> {
                         const CustomText(
                           text: "Don't have an account? ",
                           fontSize: 16,
-                          color: AppColors.bodyText,
+                          color: AppColors.KBodyText,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/sign-up');
+                            Navigator.pushNamed(context, SignInView.routeNameSignIn);
                           },
                           child: const CustomText(
                             text: 'Sign up',
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.primary,
+                            color: AppColors.KPrimary,
                           ),
                         ),
                       ],

@@ -40,7 +40,7 @@ class _SignUpViewState extends State<SignUpView> {
     if (value == null || value.isEmpty) return 'Please enter your password';
     return null;
   }
-
+static const routeNameSignUp = '/sign-up';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +63,14 @@ class _SignUpViewState extends State<SignUpView> {
                       text: 'Welcome to Chat App',
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.onPrimary,
+                      color: AppColors.KOnPrimary,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
                     const CustomText(
                       text: 'Sign up to continue',
                       fontSize: 16,
-                      color: AppColors.bodyText,
+                      color: AppColors.KBodyText,
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
@@ -99,7 +99,7 @@ class _SignUpViewState extends State<SignUpView> {
                         const CustomText(
                           text: "I have an account ",
                           fontSize: 16,
-                          color: AppColors.bodyText,
+                          color: AppColors.KBodyText,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -109,7 +109,7 @@ class _SignUpViewState extends State<SignUpView> {
                             text: 'Sign In',
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.primary,
+                            color: AppColors.KPrimary,
                           ),
                         ),
                       ],

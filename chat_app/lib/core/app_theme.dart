@@ -5,10 +5,10 @@ abstract final class AppTheme {
   static ThemeData get light {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primary,
-        primary: AppColors.primary,
+        seedColor: AppColors.KPrimary,
+        primary: AppColors.KPrimary,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.KBackground,
       useMaterial3: true,
     );
   }
