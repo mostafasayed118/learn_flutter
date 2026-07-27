@@ -20,14 +20,13 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-      SignInView.routeNameSignIn: (context) =>  SignInView(),
-        '/sign-up': (context) =>  SignUpView(),
+        SignInView.routeNameSignIn: (context) => SignInView(),
+        SignUpView.routeNameSignUp: (context) => SignUpView(),
       },
-      initialRoute: '/sign-in',
+      initialRoute: SignInView.routeNameSignIn,
       debugShowCheckedModeBanner: false,
       title: 'Chat App',
       theme: AppTheme.light,
-      home: SignInView(),
     );
   }
 }

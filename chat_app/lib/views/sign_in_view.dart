@@ -4,10 +4,12 @@ import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text.dart';
 import 'package:chat_app/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:chat_app/views/sign_up_view.dart';
 
 class SignInView extends StatefulWidget {
   static String routeNameSignIn = '/sign-in';
-  const SignInView({ super.key});
+
+  const SignInView({super.key});
 
   @override
   State<SignInView> createState() => _SignInViewState();
@@ -41,6 +43,7 @@ class _SignInViewState extends State<SignInView> {
     if (value == null || value.isEmpty) return 'Please enter your password';
     return null;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +106,10 @@ class _SignInViewState extends State<SignInView> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, SignInView.routeNameSignIn);
+                            Navigator.pushNamed(
+                              context,
+                              SignUpView.routeNameSignUp,
+                            );
                           },
                           child: const CustomText(
                             text: 'Sign up',

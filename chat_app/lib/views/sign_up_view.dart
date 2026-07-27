@@ -3,9 +3,11 @@ import 'package:chat_app/core/app_colors.dart';
 import 'package:chat_app/widgets/custom_button.dart';
 import 'package:chat_app/widgets/custom_text.dart';
 import 'package:chat_app/widgets/custom_textfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpView extends StatefulWidget {
+  static String routeNameSignUp = '/sign-up';
   const SignUpView({super.key});
 
   @override
@@ -40,7 +42,7 @@ class _SignUpViewState extends State<SignUpView> {
     if (value == null || value.isEmpty) return 'Please enter your password';
     return null;
   }
-static const routeNameSignUp = '/sign-up';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +76,9 @@ static const routeNameSignUp = '/sign-up';
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
+                      onSaved: (value) {
+                        _emailController.text = value ?? '';
+                      },
                       controller: _emailController,
                       hintText: 'Email',
                       labelText: 'Email',
@@ -83,6 +88,9 @@ static const routeNameSignUp = '/sign-up';
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
+                      onSaved: (value) {
+                        _passwordController.text = value ?? '';
+                      },
                       controller: _passwordController,
                       hintText: 'Password',
                       labelText: 'Password',
@@ -91,7 +99,18 @@ static const routeNameSignUp = '/sign-up';
                       validator: _validatePassword,
                     ),
                     const SizedBox(height: 20),
-                    CustomButton(text: 'Sign up', onPressed: _signIn),
+                    CustomButton(
+                      text: 'Sign up',
+                      onPressed: () async {
+                        var auth = FirebaseAuth.instance;
+                        UserCredential userCredential = await auth
+                            .createUserWithEmailAndPassword(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            );
+                        print('User signed up: ${userCredential.user?.email}');
+                      },
+                    ),
                     const SizedBox(height: 20),
                     Wrap(
                       alignment: WrapAlignment.center,
