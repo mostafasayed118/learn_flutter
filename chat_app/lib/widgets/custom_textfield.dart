@@ -32,6 +32,7 @@ class CustomFormTextField extends StatelessWidget {
     );
 
     return TextFormField(
+      onSaved: onSaved,
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,

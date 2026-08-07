@@ -121,6 +121,7 @@ class _SignUpViewState extends State<SignUpView> {
                               Navigator.pushNamed(
                                 context,
                                 ChatView.routeName,
+                                arguments: _emailController.text.trim(),
                               );
                             } on FirebaseAuthException catch (e) {
                               if (!context.mounted) return;

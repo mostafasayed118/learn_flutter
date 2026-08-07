@@ -115,6 +115,7 @@ class _SignInViewState extends State<SignInView> {
                                 context,
                                 ChatView.routeName,
                                 (route) => false,
+                                arguments: _emailController.text.trim(),
                               );
                             } on FirebaseAuthException catch (e) {
                               if (!context.mounted) return;
@@ -160,6 +161,9 @@ class _SignInViewState extends State<SignInView> {
                               Navigator.pushNamed(
                                 context,
                                 SignUpView.routeNameSignUp,
+                                arguments: 
+                                   _emailController.text.trim(),
+                                
                               );
                             },
                             child: const CustomText(
