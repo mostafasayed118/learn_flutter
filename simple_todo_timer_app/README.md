@@ -2,36 +2,75 @@
 
 ![Flutter](https://img.shields.io/badge/Framework-Flutter-02569B)
 ![Dart](https://img.shields.io/badge/Language-Dart-0175C2)
-![Status](https://img.shields.io/badge/Status-WIP-ff6b6b)
+![Architecture](https://img.shields.io/badge/Architecture-Clean-green)
+![Tests](https://img.shields.io/badge/Tests-26%20%E2%9C%94-blue)
 
-> A clean-architecture todo list + timer application — **work in progress**. Currently an early-stage scaffold with the folder structure laid out but no implementation yet.
+> A clean-architecture **todo list + focus timer** built with Flutter, Bloc, and Hive. Track tasks, check them off, and run 25-minute focus sessions with elapsed time persisted per todo.
 
-> ⚠️ **Status: Early scaffold.** No `pubspec.yaml` or Dart source files exist in this directory yet. Feature set below is the target, not the current state.
+## Features
 
-## Target Features
+- ✅ **Todo management** — add, toggle-complete, and delete todos (with confirmation dialog)
+- ⏱️ **Focus timer** — 25-minute session per todo with play/pause/reset
+- 🕒 **Focus tracking** — total focused time (min/sec) accumulated per todo
+- 💾 **Local persistence** — todos survive restarts via Hive
+- 🧩 **Clean architecture** — separated core / data / domain / presentation layers
 
-- 📝 **Todo list** — add, edit, complete, and delete tasks with local persistence
-- ⏱️ **Timer** — countdown timers for task focus sessions
-- **Clean architecture** — `core` / `data` / `domain` / `features` / `shared` separation
-- State management with `flutter_bloc`, DI with `get_it`, routing with `go_router`, local storage with `Hive`
-
-## Planned Structure
+## Architecture
 
 ```
 lib/
-├── core/                  # Entities, error handling
-├── data/                  # Datasources, models, repositories
-├── domain/                # Repository interfaces, usecases
-├── features/todo/         # Todo feature (cubit, pages, widgets)
-└── shared/                # DI, extensions, routing, theme
+├── main.dart                       # Bootstrap: Hive init + GetIt wiring + runApp
+├── core/                           # Pure domain layer (no Flutter imports)
+│   ├── entities/todo.dart          # Todo entity
+│   └── error/                      # AppError (sealed) + Result<T> (Ok/Err)
+├── data/                           # Storage implementation
+│   ├── database/                   # HiveService (init/box) + TodoDao
+│   ├── models/todo_adapter.dart    # Hand-written Hive TypeAdapter
+│   └── repositories/               # TodoRepositoryImpl → Result<T>
+├── domain/
+│   ├── repositories/               # TodoRepository interface
+│   └── usecases/                   # GetTodos, AddTodo, DeleteTodo, ToggleTodo, UpdateTimerSession
+├── features/todo/presentation/
+│   ├── cubits/                     # TodoCubit + TimerCubit (Bloc)
+│   ├── pages/                      # TodoListPage, FocusTimerPage
+│   └── widgets/                    # TodoItem, TimerDisplay, EmptyState, error view
+└── shared/
+    ├── di/injection.dart           # GetIt service locator
+    ├── routing/app_router.dart     # GoRouter: "/" and "/timer/:id"
+    ├── extensions/formatters.dart  # MM:SS formatting
+    └── theme/app_theme.dart        # Material 3 theme
 ```
 
-> Layout captured from the bootstrap plan in [`.kilo/plans/`](../.kilo/plans/) (todo + timer feature, Bloc, Hive, GoRouter).
+### Data flow
+
+**Todo CRUD:** UI → TodoCubit → usecase → TodoRepository → TodoRepositoryImpl → TodoDao → Hive
+
+**Timer:** TimerCubit ticks locally each second (no storage writes per tick); elapsed seconds are persisted on pause/complete via `UpdateTimerSession`.
 
 ## Getting Started
 
-Not yet runnable — wait until the bootstrap is complete (planned: `flutter create` + clean-architecture setup).
+```bash
+cd simple_todo_timer_app
+flutter pub get
+flutter run
+```
 
-## Note
+## Tests
 
-This repository is part of the [Learn Flutter](../README.md) collection; check back after the next commit for implementation updates.
+26 tests cover the repository (against real Hive), both cubits (`bloc_test` + `fake_async`), and widget tests for the list and focus timer screens.
+
+```bash
+flutter analyze   # 0 issues
+flutter test      # 26/26 passing
+```
+
+## Dependencies
+
+| Package | Purpose |
+|---|---|
+| `flutter_bloc` / `bloc` | State management (Cubit) |
+| `get_it` | Service locator |
+| `go_router` | Navigation (`/`, `/timer/:id`) |
+| `hive` / `hive_flutter` | Local storage |
+| `equatable` | Value equality for states |
+| `lucide_icons_flutter` | Icons |
