@@ -1,76 +1,68 @@
----
-version: alpha
-name: Weather-App
-description: A clean, minimalist Flutter application to display current weather conditions. Features a blue app bar, a centralized display for city, time, temperature, and weather status, and uses custom text widgets for consistent typography.
-
----
-
 # Weather App
 
-A simple and elegant Flutter weather application that fetches and displays real-time weather conditions for a selected city. The app is designed with a minimalist user interface, focusing on readability and essential information.
+![Flutter](https://img.shields.io/badge/Framework-Flutter-02569B)
+![Dart](https://img.shields.io/badge/Language-Dart-0175C2)
+![State](https://img.shields.io/badge/State-Bloc-673AB7)
+
+> A minimalist weather application. Search for a city and view its current temperature, condition, and last-updated time — with the app theme adapting to the weather.
 
 ## Features
 
--   **Current Weather Display**: Shows the city name, last updated time, current temperature, and a brief weather status (e.g., "Sunny").
--   **Minimalist User Interface**: Clean and straightforward design with a prominent blue app bar and a centralized content area.
--   **Custom Text Widgets**: Utilizes reusable `TextWidgetBold`, `TextWidgetNormal`, and `TextWidgetGrey` for consistent styling across the application.
--   **No Weather State**: Provides a welcoming message and instructions when no weather data has been loaded or selected, guiding the user to search for a city.
+- **City search** — search view with progress/error handling
+- **Current weather display** — city, time, temperature (formatted with `intl`), and condition
+- **Dynamic theming** — body color adapts to the current weather condition (e.g., sunny, rainy)
+- **Empty state** — friendly "no weather data" screen guiding users to search
+- State management with **flutter_bloc** (Cubit) + **Dio** HTTP client
 
-## UI/UX Design
-
-The application follows a clean, minimalist design with a clear hierarchy of information.
-
-### Colors
-
--   **Primary Blue** (`#2196F3`): AppBar background.
--   **White** (`#FFFFFF`): AppBar text, main canvas background.
--   **Black** (`#000000`): Main text color for city, temperature, and status.
--   **Grey** (`#9E9E9E`): Muted text for instructions or secondary information.
-
-### Typography
-
--   **AppBar Title**: System-native sans-serif, 20px, bold (700 weight), white.
--   **City Name**: System-native sans-serif, 24px, bold (700 weight), black.
--   **Updated Time**: System-native sans-serif, 20px, normal (400 weight), black.
--   **Temperature**: System-native sans-serif, 48px, normal (400 weight), black.
--   **Weather Status**: System-native sans-serif, 24px, normal (400 weight), black.
-
-### Layout
-
--   **AppBar**: Centered title.
--   **Body**: Content is centrally aligned using a `Center` widget containing a `Column`.
--   **Main Content**: A `Column` arranges weather details vertically. A `Row` groups temperature and status horizontally.
--   **Spacing**: Minimal spacing is used to maintain a clean look. `SizedBox` widgets control spacing between elements.
-
-For a detailed breakdown of the design system, refer to [DESIGN.md](./DESIGN.md).
-
-## Architecture
-
-The project follows a component-based architecture for better organization and reusability:
+## Project Structure
 
 ```
 lib/
-├── main.dart                    # Application entry point and root widget
+├── main.dart                      # Entry — BlocProvider + BlocBuilder + theme
+├── constants/
+│   └── app_constants.dart         # Strings & endpoint URLs
+├── cubits/
+│   └── get_weather_cubit/
+│       ├── get_weather_cubit.dart
+│       └── get_weather_states.dart
+├── models/
+│   └── weather_model.dart         # Weather data model
+├── services/
+│   └── weather_service.dart       # API client (Dio)
+├── utils/
+│   └── theme_utils.dart           # Weather → theme color
 ├── views/
-│   └── home_view.dart           # Main screen, displays weather or no-weather message
+│   ├── home_view.dart             # Weather / no-weather screen
+│   └── search_view.dart           # City search
 └── widgets/
-    ├── text_widget_bold.dart    # Custom widget for bold text styling
-    ├── text_widget_grey.dart    # Custom widget for grey text styling
-    ├── text_widget_normal.dart  # Custom widget for normal text styling
-    └── no_weather_body_widget.dart # Widget to show when no weather data is available
+    ├── custom_text_widget.dart
+    ├── no_weather_body_widget.dart
+    ├── row_data_of_weather_widget.dart
+    └── weather_infobody_widget.dart
 ```
 
 ## Getting Started
 
-To run this project:
-
 ```bash
-# Navigate to the project directory
 cd weather_app
-
-# Get dependencies
 flutter pub get
-
-# Run the app
 flutter run
 ```
+
+> The API base URL is defined in `lib/constants/app_constants.dart`.
+
+## Design
+
+Minimalist palette (`#2196F3` primary, white canvas, grey mute) and typography scale are documented in [DESIGN.md](./DESIGN.md).
+
+> ⚠️ This is the *finished* solution. The original course starter scaffold lives in [`weather_app_setup-main`](../weather_app_setup-main/).
+
+## Dependencies
+
+| Package | Version | Purpose |
+|---|---|---|
+| `flutter` | SDK `^3.12.2` | Core |
+| `dio` | `^5.7.0` | HTTP client |
+| `flutter_bloc` | `^9.1.1` | State management |
+| `intl` | `^0.19.0` | Date/time formatting |
+| `cupertino_icons` | `^1.0.8` | Icons |
