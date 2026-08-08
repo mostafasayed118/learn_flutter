@@ -2,7 +2,7 @@
 
 ![Flutter](https://img.shields.io/badge/Framework-Flutter-02569B)
 ![Dart](https://img.shields.io/badge/Language-Dart-0175C2)
-![Status](https://img.shields.io/badge/Finalized_Projects-9%20✅-blue)
+![Status](https://img.shields.io/badge/Finalized_Projects-10%20✅-blue)
 
 > A collection of **Flutter projects** — from Hello World to production-style apps (chat, news, weather) — built while learning Flutter. Each project is self-contained with source code, assets, and design system documentation.
 
@@ -30,7 +30,7 @@
 
 - **Framework**: Flutter
 - **Language**: Dart
-- **Packages**: `audioplayers` (Language Learning, Tones Layer), `dio` (News, Weather), `provider` (News), `webview_flutter` (News), `flutter_bloc` (Weather), `intl` (Weather), `firebase_core`, `firebase_auth`, `cloud_firestore` (Chat)
+- **Packages**: `audioplayers` (Language Learning, Tones Layer), `dio` (News, Weather), `provider` (News), `webview_flutter` (News), `flutter_bloc` + `intl` (Weather), `firebase_core`, `firebase_auth`, `cloud_firestore` (Chat), `flutter_bloc` + `get_it` + `go_router` + `hive` (Todo & Timer)
 - **Fonts**: Pacifico (Business Card)
 - **Platforms**: Android, iOS, Web, Windows, macOS, Linux
 
