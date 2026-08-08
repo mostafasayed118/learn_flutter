@@ -73,6 +73,4 @@ flutter test      # 26/26 passing
 | `go_router` | Navigation (`/`, `/timer/:id`) |
 | `hive` / `hive_flutter` | Local storage |
 | `equatable` | Value equality for states |
-| `uuid` | Reserves unique ids |
 | `lucide_icons_flutter` | Icons |
-| `flutter_animate` | Reserved for micro-animations |
