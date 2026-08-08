@@ -22,7 +22,7 @@
 | 8 | [Tones Layer App](./tunes_layer_app/) | ✅ Completed | Rainbow xylophone pad — tap to play tones |
 | 9 | [Weather App](./weather_app/) | ✅ Completed | Minimalist app displaying current weather conditions |
 | 10 | [Weather App (Setup Starter)](./weather_app_setup-main/) | 🟡 Starter | The original course scaffold the Weather App was built from |
-| 11 | [Simple Todo & Timer](./simple_todo_timer_app/) | 🚧 In Progress | Clean-architecture todo + timer app (early scaffold) |
+| 11 | [Simple Todo & Timer](./simple_todo_timer_app/) | ✅ Completed | Clean-architecture todo list + 25-min focus timer (Bloc + Hive) |
 
 ---
 
